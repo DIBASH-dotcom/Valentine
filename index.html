@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Gifts 💖</title>
+
+<style>
+    /* ----- BASIC RESET ----- */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffccd5, #ffe6f0);
+    }
+
+    .container {
+        background: white;
+        padding: 30px 25px;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+        font-size: 2rem;
+        color: #ff4c8b;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    /* ----- BUTTONS ----- */
+    button {
+        padding: 12px 25px;
+        font-size: 1rem;
+        margin: 10px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.2s;
+    }
+
+    #Yes {
+        background-color: #ff4c8b;
+        color: white;
+    }
+
+    #Yes:hover {
+        transform: scale(1.1);
+        background-color: #ff2e6b;
+    }
+
+    #No {
+        background-color: #ccc;
+        color: #333;
+    }
+
+    #No:hover {
+        transform: scale(1.1);
+        background-color: #999;
+        color: white;
+    }
+
+    /* ----- GIF ----- */
+    .tenor-gif-embed {
+        margin-bottom: 20px;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    /* ----- ANIMATION ----- */
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- GIF -->
+    <div class="tenor-gif-embed" data-postid="26117931" data-share-method="host" data-aspect-ratio="1.23552" data-width="100%">
+        <a href="https://tenor.com/view/cat-sticker-line-sticker-sticker-woww-wow-gif-26117931">Cat Sticker</a> from 
+        <a href="https://tenor.com/search/cat+sticker-stickers">Cat Sticker Stickers</a>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+   
+    <!-- TEXT -->
+    <h1>Will You Be Mine?</h1>
+    <p>Life is an incredible journey, and I want to spend every single moment of it with you 💖</p>
+
+    <!-- BUTTONS -->
+    <button id="Yes">Yes</button> 
+    <button id="No">No</button>
+
+</div>
+
+</body>
+</html>

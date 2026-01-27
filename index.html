@@ -6,12 +6,11 @@
 <title>Valentine Gifts 💖</title>
 
 <style>
-    /* ----- BASIC RESET ----- */
     * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: 'Arial', sans-serif;
+        font-family: Arial, sans-serif;
     }
 
     body {
@@ -30,66 +29,108 @@
         text-align: center;
         max-width: 400px;
         width: 90%;
-        animation: fadeIn 1s ease-in-out;
     }
 
     h1 {
-        font-size: 2rem;
         color: #ff4c8b;
-        margin-bottom: 15px;
+        margin: 15px 0;
     }
 
     p {
-        font-size: 1rem;
         color: #555;
-        margin-bottom: 25px;
-        line-height: 1.5;
+        margin-bottom: 20px;
     }
 
-    /* ----- BUTTONS ----- */
     button {
-        padding: 12px 25px;
-        font-size: 1rem;
+        padding: 14px 30px;
         margin: 10px;
-        border-radius: 8px;
+        border-radius: 10px;
         border: none;
         cursor: pointer;
-        transition: transform 0.2s, background 0.2s;
+        font-size: 18px;
+        transition: transform 0.3s ease;
     }
 
     #Yes {
-        background-color: #ff4c8b;
+        background: #ff4c8b;
         color: white;
-    }
-
-    #Yes:hover {
-        transform: scale(1.1);
-        background-color: #ff2e6b;
     }
 
     #No {
-        background-color: #ccc;
-        color: #333;
+        background: #ccc;
     }
 
-    #No:hover {
-        transform: scale(1.1);
-        background-color: #999;
+    #SeeThis {
+        background: #ff4c8b;
         color: white;
+        animation: pulse 0.8s infinite alternate;
     }
 
-    /* ----- GIF ----- */
-    .tenor-gif-embed {
-        margin-bottom: 20px;
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.25); }
+    }
+
+    iframe {
+        width: 100%;
+        height: 280px;
+        border: none;
         border-radius: 15px;
-        overflow: hidden;
+        margin-bottom: 10px;
     }
 
-    /* ----- ANIMATION ----- */
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(-20px);}
-        to {opacity: 1; transform: translateY(0);}
-    }
+    .gift-section {
+    background: #ffc0cb;
+    padding: 25px 15px;
+    border-radius: 20px;
+}
+
+.gift-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #6b2b3e;
+    margin-bottom: 20px;
+}
+
+.gift-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.gift-card {
+    background: #ffd6e4;
+    border-radius: 20px;
+    padding: 15px 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gift-card:hover {
+    transform: scale(1.08);
+}
+
+.gift-card img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.gift-card p {
+    font-weight: bold;
+    color: #6b2b3e;
+}
+
+.gift-card iframe {
+    width: 100%;
+    height: 100px;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 8px;
+}
+
+
 </style>
 </head>
 
@@ -97,22 +138,184 @@
 
 <div class="container">
 
-    <!-- GIF -->
-    <div class="tenor-gif-embed" data-postid="26117931" data-share-method="host" data-aspect-ratio="1.23552" data-width="100%">
-        <a href="https://tenor.com/view/cat-sticker-line-sticker-sticker-woww-wow-gif-26117931">Cat Sticker</a> from 
-        <a href="https://tenor.com/search/cat+sticker-stickers">Cat Sticker Stickers</a>
+    <!-- MEDIA -->
+    <div id="media">
+        <div class="tenor-gif-embed"
+             data-postid="26117931"
+             data-share-method="host"
+             data-width="100%">
+        </div>
     </div>
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-   
-    <!-- TEXT -->
-    <h1>Will You Be Mine?</h1>
-    <p>Life is an incredible journey, and I want to spend every single moment of it with you 💖</p>
+    <script async src="https://tenor.com/embed.js"></script>
 
-    <!-- BUTTONS -->
-    <button id="Yes">Yes</button> 
-    <button id="No">No</button>
+    <!-- TITLE -->
+    <h1 id="title">Will You Be Mine?</h1>
+    <p>Life is an incredible journey, and I want to spend it with you 💖</p>
+
+    <!-- BUTTON AREA -->
+    <div id="buttons">
+        <button id="Yes">Yes</button>
+        <button id="No">No</button>
+       
+
+    </div>
+
 
 </div>
+
+<script>
+const steps = [
+    {
+        text: "Will You Be Mine 😢",
+        media: "https://giphy.com/embed/WhN0WZ5yjHgEYLXMtq"
+    },
+    {
+        text: "Think Again 😿",
+        media: "https://giphy.com/embed/OHRF8LZis06OiPDJby"
+    },
+    {
+        text: "Are You Sure 😡",
+        media: "https://giphy.com/embed/901mxGLGQN2PyCQpoc"
+    }
+];
+
+let count = 0;
+let stage = "valentine"; // valentine → gifts
+
+const mediaDiv = document.getElementById("media");
+const title = document.getElementById("title");
+const buttonsDiv = document.getElementById("buttons");
+
+const yesBtn = document.getElementById("Yes");
+const noBtn = document.getElementById("No");
+
+noBtn.addEventListener("click", () => {
+    if (count < steps.length) {
+        title.textContent = steps[count].text;
+        mediaDiv.innerHTML =
+            `<iframe src="${steps[count].media}" allowfullscreen></iframe>`;
+
+        yesBtn.style.transform = `scale(${1 + (count + 1) * 0.3})`;
+        count++;
+
+        if (count === steps.length) {
+            buttonsDiv.innerHTML = `<button id="SeeThis">See This 💖</button>`;
+            attachSeeThis();
+        }
+    }
+});
+
+function attachSeeThis() {
+    const seeBtn = document.getElementById("SeeThis");
+
+    seeBtn.addEventListener("click", () => {
+        if (stage === "valentine") {
+            title.textContent = "Happy Valentine Day Baby 💕";
+            mediaDiv.innerHTML =
+                `<iframe src="https://giphy.com/embed/iJDthUh1cvaF2" allowfullscreen></iframe>`;
+            seeBtn.textContent = "See Gifts 🎁";
+            stage = "gifts";
+        } else {
+            showGifts();
+            buttonsDiv.innerHTML = "";
+        }
+    });
+}
+
+function showGifts() {
+    
+
+    mediaDiv.innerHTML = `
+        <div class="gift-section">
+            <div class="gift-title">Something for You</div>
+
+            <div class="gift-grid">
+                <div class="gift-card" oncilck="openGift1()">
+                    
+                    <iframe src="https://giphy.com/embed/u8Acwgvs5U9kzcj13d"  allowFullScreen></iframe>
+                    <p>Gift 1</p>
+                </div>
+
+                <div class="gift-card" onclick="openGift2()">
+                  <iframe src="https://giphy.com/embed/jQ8OtE1HXa3bx8tiRt" allowFullScreen></iframe>
+                    <p>Gift 2</p>
+                </div>
+
+                <div class="gift-card" oncilck="openGift3()">
+                   <iframe src="https://giphy.com/embed/1JmGiBtqTuehfYxuy9" allowFullScreen></iframe>
+                    <p>Gift 3</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function openGift1() {
+    let q=0;
+
+    const questions =[ 
+         { q: "When did we first talk? 💬", a: "The beginning of us 💖" },
+        { q: "Who gets angry first? 😅", a: "You (but cute)" },
+        { q: "Who loves more? 💕", a: "Me 😌" },
+        { q: "Are you mine forever? 🥺", a: "Yes, always" },
+        { q: "Will you stay with me? 💍", a: "Till the end ❤️" }
+    ];
+      showQuestion();
+       function showQuestion() {
+        mediaDiv.innerHTML = `
+            <div class="gift-section">
+                <div class="gift-title">💖 Love Quiz</div>
+                <p style="margin-bottom:15px">${questions[q].q}</p>
+                <button onclick="nextQ()">Next</button>
+            </div>
+        `;
+    }
+
+      window.nextQ = function () {
+        alert(questions[q].a);
+        q++;
+        if (q < questions.length) {
+            showQuestion();
+        } else {
+            mediaDiv.innerHTML = `
+                <div class="gift-section">
+                    <div class="gift-title">🎉 You Completed the Quiz!</div>
+                    <p>You know us perfectly 💕</p>
+                </div>
+            `;
+        }
+    };
+}
+
+function openGift3() {
+    mediaDiv.innerHTML = `
+        <div class="gift-section">
+            <div class="gift-title">💌 Our Moments</div>
+
+            <div class="gift-grid">
+
+                <div class="gift-card">
+                    <img src="photo1.jpg" alt="Moment 1">
+                    <p>📸 Our first smile together</p>
+                </div>
+
+                <div class="gift-card">
+                    <img src="photo2.jpg" alt="Moment 2">
+                    <p>🌸 That day you looked at me</p>
+                </div>
+
+                <div class="gift-card">
+                    <img src="photo3.jpg" alt="Moment 3">
+                    <p>💖 A memory I’ll never forget</p>
+                </div>
+
+            </div>
+        </div>
+    `;
+}
+
+</script>
+
 
 </body>
 </html>
